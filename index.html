@@ -5,10 +5,10 @@
 <script type="text/javascript">
 
 window.onload=function(){
-var chart = new CanvasJS.Chart("chartContainer", {
+var chart1 = new CanvasJS.Chart("chartContainer1", {
   theme: "theme2",
   title: {
-    text: "Left Eye Gaze Data 2D"
+    text: "Left Eye Gaze Data 2D X"
   },
   data: [
     {
@@ -29,13 +29,41 @@ function handleFiles() {
   setInterval(function() {
     reader.readAsText(fileList[0]);
     reader.onload = function() {
-      renderChart(reader);
+      renderChart1(reader);
+      renderChart2(reader);
     }
   }, 1000);
 }
 
+function renderChart1(reader) {
+  var dpsList = reader.result;  
+  var dps = [], dataPoint;
   
-function renderChart(reader) {
+  dpsList = dpsList.split("\n");
+  
+  for(var i = 0; i < dpsList.length; i++) {
+  	dataPoint = parseFloat(dpsList[i].split(" ")[0]);
+
+    dps.push({ y: dataPoint });
+  }
+  chart1.options.data[0].dataPoints = dps;
+  chart1.render();
+}
+
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+  theme: "theme2",
+  title: {
+    text: "Left Eye Gaze Data 2D Y"
+  },
+  data: [
+    {
+      type: "line",
+      dataPoints: []
+    }
+  ]
+}); 
+
+function renderChart2(reader) {
   var dpsList = reader.result;  
   var dps = [], dataPoint;
   
@@ -43,26 +71,21 @@ function renderChart(reader) {
   
   for(var i = 0; i < dpsList.length; i++) {
   	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
-    if(dpsList[i].split(" ")[0] === "neg") 
-    {
-    	dataPoint *= -1;
-    }
+
     dps.push({ y: dataPoint });
   }
-  chart.options.data[0].dataPoints = dps;
-  chart.render();
+  chart2.options.data[0].dataPoints = dps;
+  chart2.render();
 }
-}//]]> 
-
 </script>
 
   
 </head>
 
 <body>
-  <input type="file" id="input">
-<div id="chartContainer" style="height: 360px; width: 100%;"></div>
-
+<input type="file" id="input">
+<div id="chartContainer1" style="height: 360px; width: 100%;"></div>
+<div id="chartContainer2" style="height: 360px; width: 100%;"></div>
   
   <script>
   // tell the embed parent frame the height of the content
