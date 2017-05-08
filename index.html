@@ -34,6 +34,7 @@ function handleFiles() {
   }, 1000);
 }
 
+  
 function renderChart(reader) {
   var dpsList = reader.result;  
   var dps = [], dataPoint;
@@ -42,7 +43,8 @@ function renderChart(reader) {
   
   for(var i = 0; i < dpsList.length; i++) {
   	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
-    if(dpsList[i].split(" ")[0] === "neg") {
+    if(dpsList[i].split(" ")[0] === "neg") 
+    {
     	dataPoint *= -1;
     }
     dps.push({ y: dataPoint });
@@ -50,6 +52,7 @@ function renderChart(reader) {
   chart.options.data[0].dataPoints = dps;
   chart.render();
 }
+}//]]> 
 
 </script>
 
@@ -59,6 +62,17 @@ function renderChart(reader) {
 <body>
   <input type="file" id="input">
 <div id="chartContainer" style="height: 360px; width: 100%;"></div>
+
+  
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "a9ks2w43"
+    }], "*")
+  }
+</script>
 
 </body>
 
