@@ -1,7 +1,7 @@
 var chart = new CanvasJS.Chart("chartContainer", {
   theme: "theme2",
   title: {
-    text: "Left Eye Gaze 2D"
+    text: "Left Eye Gaze Data 2D"
   },
   data: [
     {
@@ -28,15 +28,17 @@ function handleFiles() {
 }
 
 function renderChart(reader) {
-  var strDps = reader.result;  
-  var dps = [];
+  var dpsList = reader.result;  
+  var dps = [], dataPoint;
   
-  strDps = strDps.split("\n");
-
-  for(var i = 0; i < strDps.length; i++) {
-    dps.push({x: parseInt(strDps[i].split(" ")[0]),
-              y: parseInt(strDps[i].split(" ")[1])
-             });
+  dpsList = dpsList.split("\n");
+  
+  for(var i = 0; i < dpsList.length; i++) {
+  	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    if(dpsList[i].split(" ")[0] === "neg") {
+    	dataPoint *= -1;
+    }
+    dps.push({ y: dataPoint });
   }
   chart.options.data[0].dataPoints = dps;
   chart.render();
