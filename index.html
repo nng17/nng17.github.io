@@ -150,7 +150,7 @@ window.onload=function()
     var chart5 = new CanvasJS.Chart("chartContainer5", {
       theme: "theme2",
       title: {
-        text: "Right Pupil Diameter"
+        text: "Left Pupil Diameter"
       },
       data: [
         {
@@ -167,7 +167,7 @@ window.onload=function()
       dpsList = dpsList.split("\n");
 
       for(var i = 0; i < dpsList.length; i++) {
-      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+      	dataPoint = parseFloat(dpsList[i].split(" ")[2]);
     		if(dpsList[i].split(" ")[0] === "D") {
         	dps.push({ y: dataPoint });
       	}
@@ -175,11 +175,11 @@ window.onload=function()
       chart5.options.data[0].dataPoints = dps;
       chart5.render();
     }
-
+    
     var chart6 = new CanvasJS.Chart("chartContainer6", {
       theme: "theme2",
       title: {
-        text: "Left Pupil Diameter"
+        text: "Right Pupil Diameter"
       },
       data: [
         {
@@ -196,7 +196,7 @@ window.onload=function()
       dpsList = dpsList.split("\n");
 
       for(var i = 0; i < dpsList.length; i++) {
-      	dataPoint = parseFloat(dpsList[i].split(" ")[2]);
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
     		if(dpsList[i].split(" ")[0] === "D") {
         	dps.push({ y: dataPoint });
       	}
