@@ -4,89 +4,310 @@
 <script src="canvasjs.min.js"></script>
 <script type="text/javascript">
 
-window.onload=function(){
-var chart1 = new CanvasJS.Chart("chartContainer1", {
-  theme: "theme2",
-  title: {
-    text: "Left Eye Gaze Data 2D X"
-  },
-  data: [
-    {
-      type: "line",
-      dataPoints: []
+window.onload=function()
+{
+    var chart1 = new CanvasJS.Chart("chartContainer1", {
+      theme: "theme2",
+      title: {
+        text: "Left Eye Position X-Coordinate"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    //-- Event handler for the input tag
+    var inputElement = document.getElementById("input");
+    inputElement.addEventListener("change", handleFiles, false);
+
+    function handleFiles() {
+      var fileList = this.files;
+      var reader = new FileReader();
+
+      setInterval(function() {
+        reader.readAsText(fileList[0]);
+        reader.onload = function() {
+          renderChart1(reader);
+          renderChart2(reader);
+          renderChart3(reader);
+          renderChart4(reader);
+          renderChart5(reader);
+          renderChart6(reader);
+          renderChart7(reader);
+          renderChart8(reader);
+          renderChart9(reader);
+        }
+      }, 1000);
     }
-  ]
-}); 
 
-//-- Event handler for the input tag
-var inputElement = document.getElementById("input");
-inputElement.addEventListener("change", handleFiles, false);
+    function renderChart1(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
 
-function handleFiles() {
-  var fileList = this.files;
-  var reader = new FileReader();
+      dpsList = dpsList.split("\n");
 
-  setInterval(function() {
-    reader.readAsText(fileList[0]);
-    reader.onload = function() {
-      renderChart1(reader);
-      renderChart2(reader);
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    		if(dpsList[i].split(" ")[0] === "LG") {
+
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart1.options.data[0].dataPoints = dps;
+      chart1.render();
     }
-  }, 1000);
-}
 
-function renderChart1(reader) {
-  var dpsList = reader.result;  
-  var dps = [], dataPoint;
-  
-  dpsList = dpsList.split("\n");
-  
-  for(var i = 0; i < dpsList.length; i++) {
-  	dataPoint = parseFloat(dpsList[i].split(" ")[0]);
+    var chart2 = new CanvasJS.Chart("chartContainer2", {
+      theme: "theme2",
+      title: {
+        text: "Left Eye Position Y-Coordinate"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
 
-    dps.push({ y: dataPoint });
-  }
-  chart1.options.data[0].dataPoints = dps;
-  chart1.render();
-}
+    function renderChart2(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
 
-var chart2 = new CanvasJS.Chart("chartContainer2", {
-  theme: "theme2",
-  title: {
-    text: "Left Eye Gaze Data 2D Y"
-  },
-  data: [
-    {
-      type: "line",
-      dataPoints: []
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[2]);
+    		if(dpsList[i].split(" ")[0] === "LG") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart2.options.data[0].dataPoints = dps;
+      chart2.render();
     }
-  ]
-}); 
 
-function renderChart2(reader) {
-  var dpsList = reader.result;  
-  var dps = [], dataPoint;
-  
-  dpsList = dpsList.split("\n");
-  
-  for(var i = 0; i < dpsList.length; i++) {
-  	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    var chart3 = new CanvasJS.Chart("chartContainer3", {
+      theme: "theme2",
+      title: {
+        text: "Right Eye Position X-Coordinate"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
 
-    dps.push({ y: dataPoint });
-  }
-  chart2.options.data[0].dataPoints = dps;
-  chart2.render();
+    function renderChart3(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    		if(dpsList[i].split(" ")[0] === "RG") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart3.options.data[0].dataPoints = dps;
+      chart3.render();
+    }
+
+    var chart4 = new CanvasJS.Chart("chartContainer4", {
+      theme: "theme2",
+      title: {
+        text: "Right Eye Position Y-Coordinate"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    function renderChart4(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[2]);
+    		if(dpsList[i].split(" ")[0] === "RG") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart4.options.data[0].dataPoints = dps;
+      chart4.render();
+    }
+
+    var chart5 = new CanvasJS.Chart("chartContainer5", {
+      theme: "theme2",
+      title: {
+        text: "Right Pupil Diameter"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    function renderChart5(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    		if(dpsList[i].split(" ")[0] === "D") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart5.options.data[0].dataPoints = dps;
+      chart5.render();
+    }
+
+    var chart6 = new CanvasJS.Chart("chartContainer6", {
+      theme: "theme2",
+      title: {
+        text: "Left Pupil Diameter"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    function renderChart6(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[2]);
+    		if(dpsList[i].split(" ")[0] === "D") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart6.options.data[0].dataPoints = dps;
+      chart6.render();
+    }
+
+    var chart7 = new CanvasJS.Chart("chartContainer7", {
+      theme: "theme2",
+      title: {
+        text: "Left Eye Validity"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    function renderChart7(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    		if(dpsList[i].split(" ")[0] === "V") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart7.options.data[0].dataPoints = dps;
+      chart7.render();
+    }
+
+    var chart8 = new CanvasJS.Chart("chartContainer8", {
+      theme: "theme2",
+      title: {
+        text: "Right Eye Validity"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    function renderChart8(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    		if(dpsList[i].split(" ")[0] === "V") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart8.options.data[0].dataPoints = dps;
+      chart8.render();
+    }
+
+    var chart9 = new CanvasJS.Chart("chartContainer9", {
+      theme: "theme2",
+      title: {
+        text: "Timestamp"
+      },
+      data: [
+        {
+          type: "line",
+          dataPoints: []
+        }
+      ]
+    });
+
+    function renderChart9(reader) {
+      var dpsList = reader.result;
+      var dps = [], dataPoint;
+
+      dpsList = dpsList.split("\n");
+
+      for(var i = 0; i < dpsList.length; i++) {
+      	dataPoint = parseFloat(dpsList[i].split(" ")[1]);
+    		if(dpsList[i].split(" ")[0] === "T") {
+        	dps.push({ y: dataPoint });
+      	}
+      }
+      chart9.options.data[0].dataPoints = dps;
+      chart9.render();
+    }
 }
 </script>
 
-  
 </head>
 
 <body>
-<input type="file" id="input">
-<div id="chartContainer1" style="height: 360px; width: 100%;"></div>
-<div id="chartContainer2" style="height: 360px; width: 100%;"></div>
-  
+<input type="file" id="input"> <br></br>
+<div id="chartContainer1" style="height: 360px; width: 50%; float:left;"></div>
+<div id="chartContainer2" style="height: 360px; width: 50%;"></div> </br></br></br>
+<div id="chartContainer3" style="height: 360px; width: 50%; float:left;"></div>
+<div id="chartContainer4" style="height: 360px; width: 50%;"></div> </br></br></br>
+<div id="chartContainer5" style="height: 360px; width: 50%; float:left;"></div>
+<div id="chartContainer6" style="height: 360px; width: 50%;"></div> </br></br></br>
+<div id="chartContainer7" style="height: 360px; width: 50%; float:left;"></div>
+<div id="chartContainer8" style="height: 360px; width: 50%;"></div> </br></br></br>
+<div id="chartContainer9" style="height: 360px; width: 100%;"></div> </br></br></br>
+
   <script>
   // tell the embed parent frame the height of the content
   if (window.parent && window.parent.parent){
@@ -100,4 +321,3 @@ function renderChart2(reader) {
 </body>
 
 </html>
-
